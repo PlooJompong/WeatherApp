@@ -8,7 +8,6 @@ import android.location.LocationManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.Settings
-import android.widget.Button
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -24,33 +23,7 @@ class PermissionActivity : AppCompatActivity() {
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
 
-        /*
-        val btn = findViewById<Button>(R.id.button)
-
-        btn.setOnClickListener {
-            fetchLocation()
-            println("Clicked")
-        }
-
-        */
-
         getCurrentLocation()
-    }
-
-    // V.2
-    private fun fetchLocation() {
-        val task = fusedLocationProviderClient.lastLocation
-
-        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
-            ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), 101)
-            return
-        }
-        task.addOnSuccessListener {
-            if (it != null) {
-                Toast.makeText(applicationContext, "${it.longitude}", Toast.LENGTH_SHORT).show()
-            }
-        }
     }
 
     // V.1
