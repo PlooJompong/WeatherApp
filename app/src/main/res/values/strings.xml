@@ -2,7 +2,7 @@
     <string name="app_name">WeatherApp</string>
     <string name="enter_location">Enter Location</string>
     <string name="clouds">Clouds</string>
-    <string name="uppsala">Uppsala</string>
+    <string name="Uppsala">Uppsala</string>
     <string name="_20">20°</string>
     <string name="h_24">H: 24°</string>
     <string name="l_14">L: 14°</string>

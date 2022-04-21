@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
 import android.widget.Toast
+import com.example.weatherapp.databinding.ActivityMainBinding
 import com.example.weatherapp.model.ApiService
 import com.example.weatherapp.model.City
 import retrofit2.Call
@@ -12,16 +13,17 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.util.function.ToDoubleBiFunction
-import kotlin.math.roundToInt
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityMainBinding
     private val apiKey = "496590d7d8475f1ebd44ee0000855e47"
-    private var cityName = "Bangkok"
+    private var cityName = "Stockholm"
 
     override fun onCreate (savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView (R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView (binding.root)
 
         /* API
         "https://api.openweathermap.org/data/2.5/weather?units=metric&q=stockholm&appid=496590d7d8475f1ebd44ee0000855e47"
@@ -36,6 +38,7 @@ class MainActivity : AppCompatActivity() {
     private fun fetchCurrentLocation(cityName: String) {
         val retrofit = Retrofit.Builder()
             .baseUrl("https://api.openweathermap.org/data/2.5/")
+            //.baseUrl("https://api.openweathermap.org/data/2.5/weather?units=metric&q=${cityName}&appid=${apiKey}")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
@@ -43,7 +46,7 @@ class MainActivity : AppCompatActivity() {
         val apiService = retrofit.create(ApiService::class.java)
         val call = apiService.getInfo("metric", cityName, apiKey )
 
-        //val serchBar = findViewById<EditText>(R.id.searchBar)
+        /*
         val temp = findViewById<TextView>(R.id.currentWeather)
         val location = findViewById<TextView>(R.id.currentLocation)
         val description = findViewById<TextView>(R.id.description)
@@ -52,6 +55,7 @@ class MainActivity : AppCompatActivity() {
         val feelsLike = findViewById<TextView>(R.id.feelsLike)
         val humidity = findViewById<TextView>(R.id.humidity)
         val windSpeed = findViewById<TextView>(R.id.windSpeed)
+         */
 
         call.enqueue(object: Callback<City> {
             // Quickfix ??
@@ -59,14 +63,14 @@ class MainActivity : AppCompatActivity() {
             override fun onResponse(call: Call<City>, response: Response<City>) {
                 if (response.isSuccessful) {
                     val weather = response.body()
-                    temp.text = weather!!.main.temp.toInt().toString() + "°"
-                    location.text = weather!!.name
-                    description.text = weather.weather[0].main
-                    maxTemp.text =  "H: " + weather.main.temp_max.toInt().toString() + "°"
-                    minTemp.text = "L: " + weather.main.temp_min.toInt().toString() + "°"
-                    feelsLike.text = weather.main.feels_like.toInt().toString() + "°"
-                    humidity.text = weather.main.humidity.toString() + "%"
-                    windSpeed.text = weather.wind.speed.toInt().toString() + " m/s"
+                    binding.currentWeather.text = weather!!.main.temp.toInt().toString() + "°"
+                    binding.currentLocation.text = weather!!.name
+                    binding.description.text = weather.weather[0].main
+                    binding.highTemp.text =  "H: " + weather.main.temp_max.toInt().toString() + "°"
+                    binding.lowTemp.text = "L: " + weather.main.temp_min.toInt().toString() + "°"
+                    binding.feelsLike.text = weather.main.feels_like.toInt().toString() + "°"
+                    binding.humidity.text = weather.main.humidity.toString() + "%"
+                    binding.windSpeed.text = weather.wind.speed.toInt().toString() + " m/s"
 
                     /* Debug
                     Toast.makeText(this@MainActivity, weather!!.name, Toast.LENGTH_SHORT).show()
