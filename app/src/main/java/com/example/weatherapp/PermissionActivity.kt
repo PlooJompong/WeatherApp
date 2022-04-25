@@ -1,5 +1,6 @@
 package com.example.weatherapp
 
+import android.Manifest
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -8,6 +9,7 @@ import android.location.LocationManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.Settings
+import android.widget.TextView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -28,19 +30,26 @@ class PermissionActivity : AppCompatActivity() {
 
     // V.1
     private fun getCurrentLocation() {
-        if (checkPermission()) {
+        if (checkPermissions()) {
             if (isLocationEnabled()) {
+                if (ActivityCompat.checkSelfPermission(
+                        this,
+                        Manifest.permission.ACCESS_FINE_LOCATION
+                    ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                        this,
+                        Manifest.permission.ACCESS_COARSE_LOCATION
+                    ) != PackageManager.PERMISSION_GRANTED
+                ) {
+                    requestPermissions()
+                    return
+                }
                 fusedLocationProviderClient.lastLocation.addOnCompleteListener(this) { task ->
                     val location: Location?= task.result
                     if (location == null) {
-                        Toast.makeText(this, "Null", Toast.LENGTH_SHORT).show()
-                        //val intent = Intent(this, MainActivity::class.java)
-                        //startActivity(intent)
+                        Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show()
 
                     } else {
-                        Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show()
-                        val intent = Intent(this, MainActivity::class.java)
-                        startActivity(intent)
+                        Toast.makeText(this, "Fail", Toast.LENGTH_SHORT).show()
                     }
                 }
             } else { // If local is disable. Launch settings
@@ -49,14 +58,14 @@ class PermissionActivity : AppCompatActivity() {
                 startActivity(intent)
             }
         } else {
-            requestPermission()
+            requestPermissions()
         }
     }
 
     // Check if permissions is granted
-    private fun checkPermission(): Boolean {
-        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
-            ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+    private fun checkPermissions(): Boolean {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
+            ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             return true
         }
         return false
@@ -70,13 +79,13 @@ class PermissionActivity : AppCompatActivity() {
     }
 
     companion object {
-        private const val Permission_Request_ACCESS_LOCATION = 100
+        private const val PERMISSION_REQUEST_ACCESS_LOCATION = 100
     }
 
     // If the permissions denied the first time then request again.
-    private fun requestPermission() {
-        ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.ACCESS_COARSE_LOCATION, android.Manifest.permission.ACCESS_FINE_LOCATION),
-            Permission_Request_ACCESS_LOCATION
+    private fun requestPermissions() {
+        ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION),
+            PERMISSION_REQUEST_ACCESS_LOCATION
         )
     }
 
@@ -86,7 +95,7 @@ class PermissionActivity : AppCompatActivity() {
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == Permission_Request_ACCESS_LOCATION) {
+        if (requestCode == PERMISSION_REQUEST_ACCESS_LOCATION) {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED ) {
                 Toast.makeText(applicationContext, "Granted", Toast.LENGTH_SHORT).show()
                 getCurrentLocation()

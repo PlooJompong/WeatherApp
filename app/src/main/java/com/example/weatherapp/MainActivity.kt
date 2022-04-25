@@ -3,10 +3,8 @@ package com.example.weatherapp
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.TextView
-import android.widget.Toast
 import com.example.weatherapp.databinding.ActivityMainBinding
-import com.example.weatherapp.model.ApiService
+import com.example.weatherapp.model.ApiInterface
 import com.example.weatherapp.model.City
 import retrofit2.Call
 import retrofit2.Callback
@@ -16,12 +14,16 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class MainActivity : AppCompatActivity() {
 
+    // Add viewBinding
     private lateinit var binding: ActivityMainBinding
     private val apiKey = "496590d7d8475f1ebd44ee0000855e47"
-    private var cityName = "Stockholm"
+    private var cityName = ""
+    private var tempCityName = "Stockholm"
 
     override fun onCreate (savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // viewBinding
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView (binding.root)
 
@@ -29,9 +31,23 @@ class MainActivity : AppCompatActivity() {
         "https://api.openweathermap.org/data/2.5/weather?units=metric&q=stockholm&appid=496590d7d8475f1ebd44ee0000855e47"
         */
 
-        fetchCurrentLocation(cityName)
+        fetchCurrentLocation(tempCityName)
 
         // TODO: Search Function
+
+    }
+
+    private fun searchCity() {
+        val searchBar = findViewById<androidx.appcompat.widget.SearchView>(R.id.searchBar)
+        searchBar.setOnQueryTextListener(object: androidx.appcompat.widget.SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                cityName = query
+                return true
+            }
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return true
+            }
+        })
 
     }
 
@@ -43,19 +59,8 @@ class MainActivity : AppCompatActivity() {
             .build()
 
         // Connector
-        val apiService = retrofit.create(ApiService::class.java)
+        val apiService = retrofit.create(ApiInterface::class.java)
         val call = apiService.getInfo("metric", cityName, apiKey )
-
-        /*
-        val temp = findViewById<TextView>(R.id.currentWeather)
-        val location = findViewById<TextView>(R.id.currentLocation)
-        val description = findViewById<TextView>(R.id.description)
-        val maxTemp = findViewById<TextView>(R.id.highTemp)
-        val minTemp = findViewById<TextView>(R.id.lowTemp)
-        val feelsLike = findViewById<TextView>(R.id.feelsLike)
-        val humidity = findViewById<TextView>(R.id.humidity)
-        val windSpeed = findViewById<TextView>(R.id.windSpeed)
-         */
 
         call.enqueue(object: Callback<City> {
             // Quickfix ??
