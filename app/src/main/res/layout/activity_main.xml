@@ -9,7 +9,7 @@
     tools:context=".MainActivity">
 
     <androidx.appcompat.widget.SearchView
-        android:id="@+id/searchBar"
+        android:id="@+id/svSearchBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -22,7 +22,7 @@
         android:drawablePadding="15dp"
         android:ems="10"
         android:fontFamily="@font/roboto"
-        android:imeOptions="actionSearch"
+        android:hint="@string/enter_location"
         android:inputType="text"
         android:minHeight="48dp"
         android:paddingStart="15dp"
@@ -32,10 +32,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="TextContrastCheck" />
 
     <TextView
-        android:id="@+id/description"
+        android:id="@+id/tvDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto"
@@ -47,19 +48,19 @@
         android:textColor="@color/white"
         android:textColorHint="@color/white"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="@+id/currentLocation"
-        app:layout_constraintEnd_toEndOf="@+id/searchBar"
-        app:layout_constraintTop_toTopOf="@+id/currentLocation" />
+        app:layout_constraintBottom_toBottomOf="@+id/tvLocation"
+        app:layout_constraintEnd_toEndOf="@+id/svSearchBar"
+        app:layout_constraintTop_toTopOf="@+id/tvLocation" />
 
     <TextView
-        android:id="@+id/currentLocation"
+        android:id="@+id/tvLocation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
         android:layout_marginTop="76dp"
         android:drawablePadding="15dp"
         android:fontFamily="@font/roboto"
-        android:hint="@string/Uppsala"
+        android:hint="@string/uppsala"
         android:shadowColor="@color/black"
         android:shadowDx="2"
         android:shadowDy="2"
@@ -70,15 +71,15 @@
         android:textStyle="bold"
         app:drawableEndCompat="@android:drawable/ic_dialog_map"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchBar" />
+        app:layout_constraintTop_toBottomOf="@+id/svSearchBar" />
 
     <TextView
-        android:id="@+id/currentWeather"
+        android:id="@+id/tvWeather"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="204dp"
         android:fontFamily="@font/roboto"
-        android:hint="@string/_20"
+        android:hint="@string/_7"
         android:shadowColor="@color/black"
         android:shadowDx="2"
         android:shadowDy="2"
@@ -90,10 +91,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchBar" />
+        app:layout_constraintTop_toBottomOf="@+id/svSearchBar" />
 
     <TextView
-        android:id="@+id/highTemp"
+        android:id="@+id/tvHighTemp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -106,14 +107,14 @@
         android:textColor="@color/white"
         android:textColorHint="@color/white"
         android:textSize="16sp"
-        app:layout_constraintEnd_toStartOf="@+id/lowTemp"
+        app:layout_constraintEnd_toStartOf="@+id/tvLowTemp"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/currentWeather"
+        app:layout_constraintTop_toBottomOf="@+id/tvWeather"
         tools:ignore="TextContrastCheck" />
 
     <TextView
-        android:id="@+id/lowTemp"
+        android:id="@+id/tvLowTemp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -128,12 +129,12 @@
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/highTemp"
-        app:layout_constraintTop_toBottomOf="@+id/currentWeather"
+        app:layout_constraintStart_toEndOf="@+id/tvHighTemp"
+        app:layout_constraintTop_toBottomOf="@+id/tvWeather"
         tools:ignore="TextContrastCheck" />
 
     <View
-        android:id="@+id/glassEffect"
+        android:id="@+id/vBox"
         android:layout_width="340dp"
         android:layout_height="120dp"
         android:layout_marginTop="104dp"
@@ -143,11 +144,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/currentWeather"
+        app:layout_constraintTop_toBottomOf="@+id/tvWeather"
         app:layout_constraintVertical_bias="0.324" />
 
     <TextView
-        android:id="@+id/windSpeedText"
+        android:id="@+id/tvWindSpeedText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto"
@@ -158,14 +159,14 @@
         android:text="@string/wind_speed"
         android:textColor="@color/white"
         android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="@+id/humidityText"
-        app:layout_constraintEnd_toEndOf="@+id/windSpeed"
+        app:layout_constraintBottom_toBottomOf="@+id/tvHumidityText"
+        app:layout_constraintEnd_toEndOf="@+id/tvWindSpeed"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/windSpeed"
-        app:layout_constraintTop_toTopOf="@+id/humidityText" />
+        app:layout_constraintStart_toStartOf="@+id/tvWindSpeed"
+        app:layout_constraintTop_toTopOf="@+id/tvHumidityText" />
 
     <TextView
-        android:id="@+id/humidityText"
+        android:id="@+id/tvHumidityText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto"
@@ -176,13 +177,13 @@
         android:text="@string/humidity"
         android:textColor="@color/white"
         android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="@+id/glassEffect"
-        app:layout_constraintEnd_toEndOf="@+id/humidity"
-        app:layout_constraintStart_toStartOf="@+id/humidity"
-        app:layout_constraintTop_toBottomOf="@+id/humidity" />
+        app:layout_constraintBottom_toBottomOf="@+id/vBox"
+        app:layout_constraintEnd_toEndOf="@+id/tvHumidity"
+        app:layout_constraintStart_toStartOf="@+id/tvHumidity"
+        app:layout_constraintTop_toBottomOf="@+id/tvHumidity" />
 
     <TextView
-        android:id="@+id/feelsLikeText"
+        android:id="@+id/tvFeelsLikeText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto"
@@ -193,13 +194,13 @@
         android:text="@string/feels_like"
         android:textColor="@color/white"
         android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="@+id/humidityText"
-        app:layout_constraintEnd_toEndOf="@+id/feelsLike"
-        app:layout_constraintStart_toStartOf="@+id/feelsLike"
-        app:layout_constraintTop_toTopOf="@+id/humidityText" />
+        app:layout_constraintBottom_toBottomOf="@+id/tvHumidityText"
+        app:layout_constraintEnd_toEndOf="@+id/tvFeelsLike"
+        app:layout_constraintStart_toStartOf="@+id/tvFeelsLike"
+        app:layout_constraintTop_toTopOf="@+id/tvHumidityText" />
 
     <TextView
-        android:id="@+id/windSpeed"
+        android:id="@+id/tvWindSpeed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto"
@@ -211,13 +212,13 @@
         android:textColor="@color/white"
         android:textColorHint="@color/white"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/humidity"
-        app:layout_constraintEnd_toEndOf="@+id/glassEffect"
-        app:layout_constraintStart_toEndOf="@+id/humidity"
-        app:layout_constraintTop_toTopOf="@+id/humidity" />
+        app:layout_constraintBottom_toBottomOf="@+id/tvHumidity"
+        app:layout_constraintEnd_toEndOf="@+id/vBox"
+        app:layout_constraintStart_toEndOf="@+id/tvHumidity"
+        app:layout_constraintTop_toTopOf="@+id/tvHumidity" />
 
     <TextView
-        android:id="@+id/humidity"
+        android:id="@+id/tvHumidity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -230,13 +231,13 @@
         android:textColor="@color/white"
         android:textColorHint="@color/white"
         android:textSize="20sp"
-        app:layout_constraintEnd_toStartOf="@+id/windSpeed"
+        app:layout_constraintEnd_toStartOf="@+id/tvWindSpeed"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/feelsLike"
-        app:layout_constraintTop_toTopOf="@+id/glassEffect" />
+        app:layout_constraintStart_toEndOf="@+id/tvFeelsLike"
+        app:layout_constraintTop_toTopOf="@+id/vBox" />
 
     <TextView
-        android:id="@+id/feelsLike"
+        android:id="@+id/tvFeelsLike"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto"
@@ -248,9 +249,9 @@
         android:textColor="@color/white"
         android:textColorHint="@color/white"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/humidity"
-        app:layout_constraintEnd_toStartOf="@+id/humidity"
-        app:layout_constraintStart_toStartOf="@+id/glassEffect"
-        app:layout_constraintTop_toTopOf="@+id/humidity" />
+        app:layout_constraintBottom_toBottomOf="@+id/tvHumidity"
+        app:layout_constraintEnd_toStartOf="@+id/tvHumidity"
+        app:layout_constraintStart_toStartOf="@+id/vBox"
+        app:layout_constraintTop_toTopOf="@+id/tvHumidity" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
