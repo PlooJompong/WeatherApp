@@ -2,6 +2,7 @@ package com.example.weatherapp
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -10,6 +11,11 @@ import android.location.LocationManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.Settings
+import android.view.KeyEvent
+import android.view.View
+import android.view.View.GONE
+import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import com.example.weatherapp.api.ApiService
@@ -26,7 +32,7 @@ class MainActivity : AppCompatActivity() {
     // Add viewBinding
     private lateinit var binding: ActivityMainBinding
     private val apiKey = "496590d7d8475f1ebd44ee0000855e47"
-    private var cityName = "Stockholm"
+    private var cityName = ""
 
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private val permissionId = 100
@@ -38,13 +44,18 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView (binding.root)
 
-
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+
+        val tempCityName = intent.getStringExtra("City")
+        if (tempCityName != null) {
+            cityName = tempCityName
+        }
 
         permission()
 
-        // TODO - try to get current location
-
+        // TODO - *ViewModel*
+        // TODO - Extras: try to get current location with fusedLocationClient
+        // TODO - Extras: add fragment
     }
 
     private fun permission() {
@@ -68,7 +79,6 @@ class MainActivity : AppCompatActivity() {
                     } else {
                         fetchWeatherData()
                         getCityWeatherData()
-                        println("Success")
                     }
                 }
             } else { // If local is disable. Launch settings
@@ -127,7 +137,10 @@ class MainActivity : AppCompatActivity() {
                 if (response.isSuccessful) {
                     setDataOnView(response.body())
                 } else {
-                    Toast.makeText(applicationContext, "Invalid Name", Toast.LENGTH_SHORT).show()
+                    binding.root.visibility = GONE
+                    val intent = Intent(this@MainActivity, StartCity::class.java)
+                    startActivity(intent)
+                    Toast.makeText(applicationContext, "Invalid City Name", Toast.LENGTH_SHORT).show()
                 }
             }
 
@@ -140,17 +153,26 @@ class MainActivity : AppCompatActivity() {
 
     // Get city weather data
     private fun getCityWeatherData() {
-        val searchBar = findViewById<androidx.appcompat.widget.SearchView>(R.id.svSearchBar)
-        searchBar.setOnQueryTextListener(object: androidx.appcompat.widget.SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String): Boolean {
-                cityName = query
+        val searchBar = findViewById<EditText>(R.id.etSearchBar)
+        searchBar.setOnKeyListener(View.OnKeyListener {
+                _, keyCode, event -> if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_UP) {
+            if (searchBar.text.isNotEmpty()) {
+                cityName = searchBar.text.toString()
                 fetchWeatherData()
-                return false
+                hideSoftKeyboard()
+                searchBar.text.clear()
             }
-            override fun onQueryTextChange(newText: String?): Boolean {
-                return false
-            }
+            return@OnKeyListener true
+        }
+            false
         })
+    }
+
+    // Hide keyboard
+    private fun Activity.hideSoftKeyboard() {
+        (getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager).apply {
+            hideSoftInputFromWindow(currentFocus?.windowToken,0)
+        }
     }
 
     // Set data on view
@@ -158,7 +180,7 @@ class MainActivity : AppCompatActivity() {
     private fun setDataOnView(body: City?) {
         binding.tvWeather.text = body!!.main.temp.toInt().toString() + "°"
         binding.tvLocation.text = body!!.name
-        binding.tvDescription?.text = body.weather[0].main
+        binding.tvDescription.text = body.weather[0].main
         binding.tvHighTemp.text =  "H: " + body.main.temp_max.toInt().toString() + "°"
         binding.tvLowTemp.text = "L: " + body.main.temp_min.toInt().toString() + "°"
         binding.tvFeelsLike.text = body.main.feels_like.toInt().toString() + "°"

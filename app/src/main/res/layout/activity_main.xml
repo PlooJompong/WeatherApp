@@ -8,8 +8,8 @@
     android:background="@drawable/background_img"
     tools:context=".MainActivity">
 
-    <androidx.appcompat.widget.SearchView
-        android:id="@+id/svSearchBar"
+    <EditText
+        android:id="@+id/etSearchBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -49,7 +49,7 @@
         android:textColorHint="@color/white"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@+id/tvLocation"
-        app:layout_constraintEnd_toEndOf="@+id/svSearchBar"
+        app:layout_constraintEnd_toEndOf="@+id/etSearchBar"
         app:layout_constraintTop_toTopOf="@+id/tvLocation" />
 
     <TextView
@@ -71,7 +71,7 @@
         android:textStyle="bold"
         app:drawableEndCompat="@android:drawable/ic_dialog_map"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/svSearchBar" />
+        app:layout_constraintTop_toBottomOf="@+id/etSearchBar" />
 
     <TextView
         android:id="@+id/tvWeather"
@@ -91,7 +91,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/svSearchBar" />
+        app:layout_constraintTop_toBottomOf="@+id/etSearchBar" />
 
     <TextView
         android:id="@+id/tvHighTemp"
