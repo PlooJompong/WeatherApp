@@ -22,9 +22,9 @@ class StartCity : AppCompatActivity() {
         searchCity.setOnKeyListener { _, keyCode, event ->
             if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_UP) {
                 if (searchCity.text.isNotEmpty()) {
-                    val cityName = searchCity.text.toString()
+                    val name = searchCity.text.toString()
                     val intent = Intent(this, MainActivity::class.java).apply {
-                        putExtra("City", cityName)
+                        putExtra("City", name)
                     }
                     startActivity(intent)
                     hideSoftKeyboard()
