@@ -16,9 +16,9 @@ class StartCity : AppCompatActivity() {
         getCity()
     }
 
+    // Search City
     private fun getCity() {
         val searchCity = findViewById<EditText>(R.id.etSearchCity)
-        // Search City
         searchCity.setOnKeyListener { _, keyCode, event ->
             if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_UP) {
                 if (searchCity.text.isNotEmpty()) {
