@@ -9,7 +9,8 @@
     <string name="wind_speed">Wind Speed</string>
     <string name="humidity">Humidity</string>
     <string name="feels_like">Feels Like</string>
-    <string name="_12_m_s">12 M/S</string>
+    <string name="_12_m_s">12 m/s</string>
     <string name="_5">5%</string>
-    <string name="_19_c">19°C</string>
+    <string name="_19">19°</string>
+    <string name="stockholm">Stockholm</string>
 </resources>

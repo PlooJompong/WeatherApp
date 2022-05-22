@@ -38,6 +38,7 @@ class MainActivity : AppCompatActivity() {
         // viewModel
         viewModel = ViewModelProvider(this)[CityNameViewModel::class.java]
 
+        /*
         // Make sure getStringExtra runs only once
         if (viewModel.cityName.isEmpty()) {
             getStringExtra()
@@ -112,4 +113,7 @@ class MainActivity : AppCompatActivity() {
         binding.tvHumidity.text = body.main.humidity.toString() + "%"
         binding.tvWindSpeed.text = body.wind.speed.toInt().toString() + " m/s"
     }
+
+         */
+}
 }
