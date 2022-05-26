@@ -1,23 +1,10 @@
 package com.example.weatherapp
 
-import android.annotation.SuppressLint
-import android.app.Activity
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.KeyEvent
-import android.view.View
-import android.view.View.GONE
-import android.view.inputmethod.InputMethodManager
-import android.widget.EditText
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import com.example.weatherapp.api.ApiService
 import com.example.weatherapp.databinding.ActivityMainBinding
-import com.example.weatherapp.model.City
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+
 
 class MainActivity : AppCompatActivity() {
     // viewBinding
@@ -37,6 +24,8 @@ class MainActivity : AppCompatActivity() {
 
         // viewModel
         viewModel = ViewModelProvider(this)[CityNameViewModel::class.java]
+
+    }
 
         /*
         // Make sure getStringExtra runs only once
@@ -115,5 +104,4 @@ class MainActivity : AppCompatActivity() {
     }
 
          */
-}
 }
