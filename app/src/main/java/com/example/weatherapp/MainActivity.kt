@@ -1,30 +1,101 @@
 package com.example.weatherapp
 
+import android.app.Activity
 import android.os.Bundle
+import android.view.KeyEvent
+import android.view.View
+import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
+import com.example.weatherapp.api.ApiService
 import com.example.weatherapp.databinding.ActivityMainBinding
+import com.example.weatherapp.model.City
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 class MainActivity : AppCompatActivity() {
-    // viewBinding
-    private lateinit var binding: ActivityMainBinding
-
-    // viewModel
     private lateinit var viewModel: CityNameViewModel
-
+    private lateinit var binding: ActivityMainBinding
     private val apiKey = "496590d7d8475f1ebd44ee0000855e47"
+    private var fragmentManager: FragmentManager = supportFragmentManager
+    private var fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
+    private var showWeatherFragment = ShowWeatherFragment()
 
     override fun onCreate (savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        // viewBinding
+        viewModel = ViewModelProvider(this)[CityNameViewModel::class.java]
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView (binding.root)
 
-        // viewModel
-        viewModel = ViewModelProvider(this)[CityNameViewModel::class.java]
+        test()
 
+        /*
+         TODO:  - Remove auto create fragment
+          - Destroy fragment before adding a new one
+        */
+
+    }
+
+    private fun test() {
+        binding.etSearchBar.setOnKeyListener(View.OnKeyListener {
+                _, keyCode, event -> if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_UP) {
+            if (binding.etSearchBar.text.isNotEmpty()) {
+                viewModel.cityName = binding.etSearchBar.text.toString()
+
+                fetchWeatherData()
+
+                binding.etSearchBar.text.clear()
+                hideSoftKeyboard()
+            }
+            return@OnKeyListener true
+        }
+            false
+        })
+    }
+
+    private fun fetchWeatherData() {
+        ApiService.getApiInterface()?.getCityWeatherData("metric", viewModel.cityName, apiKey)?.enqueue(object: Callback<City> {
+            override fun onResponse(call: Call<City>, response: Response<City>) {
+                if (response.isSuccessful) {
+                    setDataOnView(response.body())
+
+                    fragmentTransaction.add(R.id.showWeatherFragment, showWeatherFragment).commit()
+                    //fragmentTransaction.remove(showWeatherFragment).commit()
+                } else {
+                    println("Error")
+                }
+            }
+
+            override fun onFailure(call: Call<City>, error: Throwable) {
+                println(error)
+            }
+        })
+    }
+
+    private fun setDataOnView(body: City?) {
+        val bundle = Bundle()
+
+        bundle.putString("tvDescription", body!!.weather[0].main)
+        bundle.putString("tvLocation", body.name)
+        bundle.putString("tvWeather", body.main.temp.toInt().toString())
+        bundle.putString("tvHighTemp", body.main.temp_max.toInt().toString())
+        bundle.putString("tvLowTemp", body.main.temp_min.toInt().toString())
+        bundle.putString("tvFeelsLike", body.main.feels_like.toInt().toString())
+        bundle.putString("tvHumidity", body.main.humidity.toString())
+        bundle.putString("tvWindSpeed", body.wind.speed.toInt().toString())
+
+        showWeatherFragment.arguments = bundle
+    }
+
+    // Hide softkeyboard
+    private fun Activity.hideSoftKeyboard() {
+        (getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager).apply {
+            hideSoftInputFromWindow(currentFocus?.windowToken,0)
+        }
     }
 
         /*

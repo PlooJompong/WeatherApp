@@ -6,12 +6,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:scrollbars="none">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         tools:context=".ShowWeatherFragment">
 
         <TextView
@@ -22,7 +20,7 @@
             android:layout_marginTop="76dp"
             android:drawablePadding="15dp"
             android:fontFamily="@font/roboto"
-            android:hint="Hello"
+            android:hint="@string/stockholm"
             android:shadowColor="@color/black"
             android:shadowDx="2"
             android:shadowDy="2"
