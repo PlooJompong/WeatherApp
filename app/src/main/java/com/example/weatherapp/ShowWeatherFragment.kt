@@ -36,7 +36,7 @@ class ShowWeatherFragment : Fragment() {
             val windSpeed = bundle.getString("tvWindSpeed")
 
             fragmentBinding.tvDescription.text = description
-            fragmentBinding.tvLocation.text = "$location°"
+            fragmentBinding.tvLocation.text = "$location"
             fragmentBinding.tvWeather.text = "$weather°"
             fragmentBinding.tvHighTemp.text = "H: $highTemp°"
             fragmentBinding.tvLowTemp.text = "L: $lowTemp°"

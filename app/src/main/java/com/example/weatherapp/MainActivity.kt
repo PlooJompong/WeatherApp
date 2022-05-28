@@ -7,7 +7,6 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
 import com.example.weatherapp.api.ApiService
 import com.example.weatherapp.databinding.ActivityMainBinding
@@ -21,9 +20,10 @@ class MainActivity : AppCompatActivity() {
     private lateinit var viewModel: CityNameViewModel
     private lateinit var binding: ActivityMainBinding
     private val apiKey = "496590d7d8475f1ebd44ee0000855e47"
-    private var fragmentManager: FragmentManager = supportFragmentManager
-    private var fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
-    private var showWeatherFragment = ShowWeatherFragment()
+    private val fragmentManager: FragmentManager = supportFragmentManager
+    //private val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
+    private val showWeatherFragment = ShowWeatherFragment()
+    private val loadingFragment = LoadingFragment()
 
     override fun onCreate (savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,23 +31,18 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView (binding.root)
 
-        test()
+        searchFunction()
 
-        /*
-         TODO:  - Remove auto create fragment
-          - Destroy fragment before adding a new one
-        */
+        //TODO - Reload data to fragment
 
     }
 
-    private fun test() {
+    private fun searchFunction() {
         binding.etSearchBar.setOnKeyListener(View.OnKeyListener {
                 _, keyCode, event -> if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_UP) {
             if (binding.etSearchBar.text.isNotEmpty()) {
                 viewModel.cityName = binding.etSearchBar.text.toString()
-
                 fetchWeatherData()
-
                 binding.etSearchBar.text.clear()
                 hideSoftKeyboard()
             }
@@ -62,11 +57,20 @@ class MainActivity : AppCompatActivity() {
             override fun onResponse(call: Call<City>, response: Response<City>) {
                 if (response.isSuccessful) {
                     setDataOnView(response.body())
+                    fragmentManager.beginTransaction().apply {
+                        replace(R.id.fragmentContainer, showWeatherFragment)
+                            .setReorderingAllowed(true)
+                            .addToBackStack(null)
+                            .commit()
+                    }
 
-                    fragmentTransaction.add(R.id.showWeatherFragment, showWeatherFragment).commit()
-                    //fragmentTransaction.remove(showWeatherFragment).commit()
                 } else {
-                    println("Error")
+                    fragmentManager.beginTransaction().apply {
+                        replace(R.id.fragmentContainer, loadingFragment)
+                            .setReorderingAllowed(true)
+                            .addToBackStack(null)
+                            .commit()
+                    }
                 }
             }
 
@@ -78,7 +82,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun setDataOnView(body: City?) {
         val bundle = Bundle()
-
         bundle.putString("tvDescription", body!!.weather[0].main)
         bundle.putString("tvLocation", body.name)
         bundle.putString("tvWeather", body.main.temp.toInt().toString())
@@ -87,7 +90,6 @@ class MainActivity : AppCompatActivity() {
         bundle.putString("tvFeelsLike", body.main.feels_like.toInt().toString())
         bundle.putString("tvHumidity", body.main.humidity.toString())
         bundle.putString("tvWindSpeed", body.wind.speed.toInt().toString())
-
         showWeatherFragment.arguments = bundle
     }
 
