@@ -43,7 +43,6 @@ class ShowWeatherFragment : Fragment() {
             fragmentBinding.tvFeelsLike.text = "$feelsLike°"
             fragmentBinding.tvHumidity.text = "$humidity%"
             fragmentBinding.tvWindSpeed.text = "$windSpeed m/s"
-
         }
     }
 }

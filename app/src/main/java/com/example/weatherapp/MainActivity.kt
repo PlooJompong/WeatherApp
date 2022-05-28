@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
@@ -21,7 +22,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private val apiKey = "496590d7d8475f1ebd44ee0000855e47"
     private val fragmentManager: FragmentManager = supportFragmentManager
-    //private val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
+    //  private val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
     private val showWeatherFragment = ShowWeatherFragment()
     private val loadingFragment = LoadingFragment()
 
@@ -33,7 +34,7 @@ class MainActivity : AppCompatActivity() {
 
         searchFunction()
 
-        //TODO - Reload data to fragment
+        //TODO - Reload data on fragment
 
     }
 
@@ -56,12 +57,29 @@ class MainActivity : AppCompatActivity() {
         ApiService.getApiInterface()?.getCityWeatherData("metric", viewModel.cityName, apiKey)?.enqueue(object: Callback<City> {
             override fun onResponse(call: Call<City>, response: Response<City>) {
                 if (response.isSuccessful) {
-                    setDataOnView(response.body())
-                    fragmentManager.beginTransaction().apply {
-                        replace(R.id.fragmentContainer, showWeatherFragment)
-                            .setReorderingAllowed(true)
-                            .addToBackStack(null)
+                    if (!showWeatherFragment.isVisible) {
+                        setDataOnView(response.body())
+                        fragmentManager.beginTransaction().apply {
+                            replace(R.id.fragmentContainer, showWeatherFragment)
+                                .setReorderingAllowed(true)
+                                .addToBackStack(null)
+                                .commit()
+                        }
+                        Toast.makeText(this@MainActivity, viewModel.cityName, Toast.LENGTH_SHORT).show()
+                    } else {
+                        setDataOnView(response.body())
+                        fragmentManager.beginTransaction()
+                            .detach(showWeatherFragment)
+                            .attach(showWeatherFragment)
                             .commit()
+/*
+                        fragmentManager.beginTransaction().apply {
+                            setReorderingAllowed(true)
+                            addToBackStack(null)
+                            commit()
+                        }
+ */
+                        Toast.makeText(this@MainActivity, "else " + viewModel.cityName, Toast.LENGTH_SHORT).show()
                     }
 
                 } else {
@@ -71,6 +89,7 @@ class MainActivity : AppCompatActivity() {
                             .addToBackStack(null)
                             .commit()
                     }
+                    Toast.makeText(this@MainActivity, viewModel.cityName, Toast.LENGTH_SHORT).show()
                 }
             }
 
