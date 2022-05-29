@@ -17,7 +17,13 @@ class ShowWeatherFragment : Fragment() {
     ): View {
         fragmentBinding = FragmentShowWeatherBinding.inflate(inflater, container, false)
 
-        getData()
+        if (!this.isVisible) {
+            getData()
+            println("Show")
+        } else { //TODO else kör aldrig
+            getData()
+            println("e")
+        }
 
         return fragmentBinding.root
     }
