@@ -84,7 +84,7 @@ class MainActivity : AppCompatActivity() {
             override fun onResponse(call: Call<Data>, response: Response<Data>) {
                 if (response.isSuccessful) {
                     if (!showWeatherFragment.isVisible) {
-                        sedDataToFragment(response.body())
+                        sendDataToFragment(response.body())
                         fragmentManager.beginTransaction().apply {
                             replace(R.id.fragmentContainer, showWeatherFragment)
                                 .setReorderingAllowed(true)
@@ -94,7 +94,7 @@ class MainActivity : AppCompatActivity() {
                         // Debug
                         Toast.makeText(this@MainActivity, viewModel.cityName, Toast.LENGTH_SHORT).show()
                     } else {
-                        sedDataToFragment(response.body())
+                        sendDataToFragment(response.body())
                         fragmentManager.beginTransaction().apply {
                             remove(showWeatherFragment)
                                 .commit()
@@ -123,7 +123,7 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    private fun sedDataToFragment(body: Data?) {
+    private fun sendDataToFragment(body: Data?) {
         val bundle = Bundle()
         bundle.putString("tvLocation", viewModel.cityName)
         //TODO - FIX current.weather[0].main
