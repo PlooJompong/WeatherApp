@@ -17,13 +17,7 @@ class ShowWeatherFragment : Fragment() {
     ): View {
         fragmentBinding = FragmentShowWeatherBinding.inflate(inflater, container, false)
 
-        if (!this.isVisible) {
-            getData()
-            println("Show")
-        } else { //TODO else kör aldrig
-            getData()
-            println("e")
-        }
+        getData()
 
         return fragmentBinding.root
     }
@@ -31,6 +25,7 @@ class ShowWeatherFragment : Fragment() {
     @SuppressLint("SetTextI18n")
     private fun getData() {
         val bundle = arguments
+
         if (bundle != null) {
             val description = bundle.getString("tvDescription")
             val location = bundle.getString("tvLocation")
