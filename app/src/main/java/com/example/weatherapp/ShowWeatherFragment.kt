@@ -17,13 +17,13 @@ class ShowWeatherFragment : Fragment() {
     ): View {
         fragmentBinding = FragmentShowWeatherBinding.inflate(inflater, container, false)
 
-        getData()
+        setDataOnView()
 
         return fragmentBinding.root
     }
 
     @SuppressLint("SetTextI18n")
-    private fun getData() {
+    private fun setDataOnView() {
         val bundle = arguments
 
         if (bundle != null) {

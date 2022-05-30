@@ -1,7 +1,17 @@
 package com.example.weatherapp.model
 
-import kotlin.collections.ArrayList
 
+data class City(
+    val coord: Coord,
+    val name: String = ""
+
+) {
+    class Coord {
+        val lon: Double = 0.00
+        val lat: Double = 0.00
+    }
+}
+/*
 data class City(
     val weather: ArrayList<Weather>,
     val main: Main,
@@ -25,6 +35,7 @@ data class City(
         val speed: Double = 0.0
     }
 }
+ */
 
 
 

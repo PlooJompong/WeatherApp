@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.weatherapp.api.ApiService
 import com.example.weatherapp.databinding.ActivityMainBinding
 import com.example.weatherapp.model.City
+import com.example.weatherapp.model.Data
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -39,7 +40,7 @@ class MainActivity : AppCompatActivity() {
                 _, keyCode, event -> if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_UP) {
             if (binding.etSearchBar.text.isNotEmpty()) {
                 viewModel.cityName = binding.etSearchBar.text.toString()
-                fetchWeatherData()
+                fetLatLon()
                 binding.etSearchBar.text.clear()
                 hideSoftKeyboard()
             }
@@ -49,21 +50,51 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    private fun fetchWeatherData() {
-        ApiService.getApiInterface()?.getCityWeatherData("metric", viewModel.cityName, apiKey)?.enqueue(object: Callback<City> {
+    private fun fetLatLon() {
+        ApiService.getApiInterface()?.getLatLon(viewModel.cityName, apiKey)?.enqueue(object: Callback<City> {
             override fun onResponse(call: Call<City>, response: Response<City>) {
                 if (response.isSuccessful) {
+                    saveLatLon(response.body())
+                    fetchWeatherData()
+                } else {
+                    fragmentManager.beginTransaction().apply {
+                        replace(R.id.fragmentContainer, loadingFragment)
+                            .setReorderingAllowed(true)
+                            .addToBackStack(null)
+                            .commit()
+                    }
+                    Toast.makeText(this@MainActivity, "Fail", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<City>, error: Throwable) {
+                println(error)
+            }
+        })
+    }
+
+    private fun saveLatLon(body: City?) {
+        viewModel.lat = body!!.coord.lat
+        viewModel.lon = body.coord.lon
+        viewModel.cityName = body.name
+    }
+
+    private fun fetchWeatherData() {
+        ApiService.getApiInterface()?.getData(viewModel.lat, viewModel.lon,"minutely, hourly, alerts","metric", apiKey)?.enqueue(object: Callback<Data> {
+            override fun onResponse(call: Call<Data>, response: Response<Data>) {
+                if (response.isSuccessful) {
                     if (!showWeatherFragment.isVisible) {
-                        setDataOnView(response.body())
+                        sedDataToFragment(response.body())
                         fragmentManager.beginTransaction().apply {
                             replace(R.id.fragmentContainer, showWeatherFragment)
                                 .setReorderingAllowed(true)
                                 .addToBackStack(null)
                                 .commit()
                         }
+                        // Debug
                         Toast.makeText(this@MainActivity, viewModel.cityName, Toast.LENGTH_SHORT).show()
                     } else {
-                        setDataOnView(response.body())
+                        sedDataToFragment(response.body())
                         fragmentManager.beginTransaction().apply {
                             remove(showWeatherFragment)
                                 .commit()
@@ -81,19 +112,31 @@ class MainActivity : AppCompatActivity() {
                             .addToBackStack(null)
                             .commit()
                     }
-                    Toast.makeText(this@MainActivity, viewModel.cityName, Toast.LENGTH_SHORT).show()
+                    //Debug
+                    Toast.makeText(this@MainActivity, "e", Toast.LENGTH_SHORT).show()
                 }
             }
 
-            override fun onFailure(call: Call<City>, error: Throwable) {
+            override fun onFailure(call: Call<Data>, error: Throwable) {
                 println(error)
             }
         })
     }
 
-    private fun setDataOnView(body: City?) {
+    private fun sedDataToFragment(body: Data?) {
         val bundle = Bundle()
-        bundle.putString("tvDescription", body!!.weather[0].main)
+        bundle.putString("tvLocation", viewModel.cityName)
+        //TODO - FIX current.weather[0].main
+        //bundle.putString("tvDescription", body!!.current.weather[0].main)
+        bundle.putString("tvHighTemp", body!!.daily[0].dt.toString())
+        bundle.putString("tvLowTemp", body.daily[1].dt.toString())
+
+        bundle.putString("tvWeather", body.current.temp.toInt().toString())
+        bundle.putString("tvHumidity", body.current.humidity.toString())
+        bundle.putString("tvFeelsLike", body.current.feels_like.toInt().toString())
+        bundle.putString("tvWindSpeed", body.current.wind_speed.toInt().toString())
+
+        /*
         bundle.putString("tvLocation", body.name)
         bundle.putString("tvWeather", body.main.temp.toInt().toString())
         bundle.putString("tvHighTemp", body.main.temp_max.toInt().toString())
@@ -101,10 +144,10 @@ class MainActivity : AppCompatActivity() {
         bundle.putString("tvFeelsLike", body.main.feels_like.toInt().toString())
         bundle.putString("tvHumidity", body.main.humidity.toString())
         bundle.putString("tvWindSpeed", body.wind.speed.toInt().toString())
+     */
         showWeatherFragment.arguments = bundle
     }
 
-    // Hide softkeyboard
     private fun Activity.hideSoftKeyboard() {
         (getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager).apply {
             hideSoftInputFromWindow(currentFocus?.windowToken,0)
