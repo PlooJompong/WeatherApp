@@ -30,10 +30,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
             android:layout_marginTop="24dp"
-            android:drawableEnd="@drawable/location"
             android:drawablePadding="10dp"
             android:fontFamily="@font/roboto"
-            android:hint="Paris"
+            android:hint="@string/location"
             android:shadowColor="@color/black"
             android:shadowDx="2"
             android:shadowDy="2"
@@ -43,7 +42,8 @@
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@+id/vBox1"
-            app:layout_constraintTop_toTopOf="@+id/vBox1" />
+            app:layout_constraintTop_toTopOf="@+id/vBox1"
+            app:drawableEndCompat="@drawable/location" />
 
         <TextView
             android:id="@+id/tvWeather"
@@ -64,7 +64,8 @@
             app:layout_constraintHorizontal_bias="0.141"
             app:layout_constraintStart_toStartOf="@+id/vBox1"
             app:layout_constraintTop_toTopOf="@+id/vBox1"
-            app:layout_constraintVertical_bias="0.734" />
+            app:layout_constraintVertical_bias="0.734"
+            tools:ignore="TextContrastCheck" />
 
         <TextView
             android:id="@+id/tvMain"
@@ -92,7 +93,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto"
-            android:hint="H/L: 13/15"
+            android:hint="str"
             android:shadowColor="@color/black"
             android:shadowDx="2"
             android:shadowDy="2"
@@ -146,7 +147,8 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/tvFeelsLike"
             app:layout_constraintTop_toBottomOf="@+id/tvFeelsLike"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintVertical_bias="0.0"
+            tools:ignore="TextContrastCheck" />
 
         <TextView
             android:id="@+id/tvWindSpeed"
@@ -166,7 +168,8 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/tvHumidity"
             app:layout_constraintTop_toBottomOf="@+id/tvHumidity"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintVertical_bias="0.0"
+            tools:ignore="TextContrastCheck" />
 
         <ImageView
             android:id="@+id/ivCurrentBox"
@@ -200,7 +203,6 @@
             android:shadowDx="2"
             android:shadowDy="2"
             android:shadowRadius="3"
-            android:text="TextView"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
             android:textSize="12sp"
@@ -221,7 +223,6 @@
             android:shadowDx="2"
             android:shadowDy="2"
             android:shadowRadius="3"
-            android:text="TextView"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
             android:textSize="12sp"
@@ -254,7 +255,6 @@
             android:shadowDx="2"
             android:shadowDy="2"
             android:shadowRadius="3"
-            android:text="TextView"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
             android:textSize="12sp"
@@ -276,7 +276,6 @@
             android:shadowDx="2"
             android:shadowDy="2"
             android:shadowRadius="3"
-            android:text="TextView"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
             android:textSize="12sp"
@@ -296,6 +295,7 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/ivHourly"
             app:layout_constraintTop_toTopOf="@+id/ivHourly"
+            tools:ignore="ImageContrastCheck"
             tools:srcCompat="@tools:sample/avatars" />
 
         <TextView
@@ -308,7 +308,6 @@
             android:shadowDx="2"
             android:shadowDy="2"
             android:shadowRadius="3"
-            android:text="TextView"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
             android:textSize="12sp"
@@ -330,7 +329,6 @@
             android:shadowDx="2"
             android:shadowDy="2"
             android:shadowRadius="3"
-            android:text="TextView"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
             android:textSize="12sp"
@@ -363,7 +361,6 @@
             android:shadowDx="2"
             android:shadowDy="2"
             android:shadowRadius="3"
-            android:text="TextView"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
             android:textSize="12sp"
@@ -385,7 +382,6 @@
             android:shadowDx="2"
             android:shadowDy="2"
             android:shadowRadius="3"
-            android:text="TextView"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
             android:textSize="12sp"
@@ -434,7 +430,6 @@
             android:shadowDx="2"
             android:shadowDy="2"
             android:shadowRadius="3"
-            android:text="TextView"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
             android:textSize="12sp"
@@ -454,7 +449,6 @@
             android:shadowDx="2"
             android:shadowDy="2"
             android:shadowRadius="3"
-            android:text="TextView"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
             android:textSize="12sp"
@@ -486,7 +480,6 @@
             android:shadowDx="2"
             android:shadowDy="2"
             android:shadowRadius="3"
-            android:text="TextView"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
             android:textSize="12sp"
@@ -507,7 +500,6 @@
             android:shadowDx="2"
             android:shadowDy="2"
             android:shadowRadius="3"
-            android:text="TextView"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
             android:textSize="12sp"
@@ -538,7 +530,6 @@
             android:shadowDx="2"
             android:shadowDy="2"
             android:shadowRadius="3"
-            android:text="TextView"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
             android:textSize="12sp"
@@ -558,7 +549,6 @@
             android:shadowDx="2"
             android:shadowDy="2"
             android:shadowRadius="3"
-            android:text="TextView"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
             android:textSize="12sp"
@@ -589,7 +579,6 @@
             android:shadowDx="2"
             android:shadowDy="2"
             android:shadowRadius="3"
-            android:text="TextView"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
             android:textSize="12sp"
@@ -609,7 +598,6 @@
             android:shadowDx="2"
             android:shadowDy="2"
             android:shadowRadius="3"
-            android:text="TextView"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
             android:textSize="12sp"
@@ -629,7 +617,8 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/ivDaily3"
             app:layout_constraintTop_toTopOf="@+id/ivDaily3"
+            tools:ignore="ImageContrastCheck"
             tools:srcCompat="@tools:sample/avatars" />
-        
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

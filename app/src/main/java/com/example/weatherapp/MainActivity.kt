@@ -179,17 +179,28 @@ class MainActivity : AppCompatActivity() {
         bundle.putString("tvTime4", timeStampToTime(body.hourly[4].dt.toLong()))
         bundle.putString("tvTemp4", body.hourly[4].temp.toInt().toString())
         bundle.putString("iconHourly4", body.hourly[4].weather[0].icon)
+        //Daily
+        //+1
+        bundle.putString("tvDay", timeStampToDate(body.daily[1].dt.toLong()))
+        bundle.putString("tvDayLowTemp", body.daily[1].temp.min.toInt().toString())
+        bundle.putString("tvDayHighTemp", body.daily[1].temp.max.toInt().toString())
+        bundle.putString("iconDaily", body.daily[1].weather[0].icon)
+        //+2
+        bundle.putString("tvDay2", timeStampToDate(body.daily[2].dt.toLong()))
+        bundle.putString("tvDayLowTemp2", body.daily[2].temp.min.toInt().toString())
+        bundle.putString("tvDayHighTemp2", body.daily[2].temp.max.toInt().toString())
+        bundle.putString("iconDaily2", body.daily[2].weather[0].icon)
+        //+3
+        bundle.putString("tvDay3", timeStampToDate(body.daily[3].dt.toLong()))
+        bundle.putString("tvDayLowTemp3", body.daily[3].temp.min.toInt().toString())
+        bundle.putString("tvDayHighTemp3", body.daily[3].temp.max.toInt().toString())
+        bundle.putString("iconDaily3", body.daily[3].weather[0].icon)
+        //+4
+        bundle.putString("tvDay4", timeStampToDate(body.daily[4].dt.toLong()))
+        bundle.putString("tvDayLowTemp4", body.daily[4].temp.min.toInt().toString())
+        bundle.putString("tvDayHighTemp4", body.daily[4].temp.max.toInt().toString())
+        bundle.putString("iconDaily4", body.daily[4].weather[0].icon)
 
-
-        /*
-        bundle.putString("tvLocation", body.name)
-        bundle.putString("tvWeather", body.main.temp.toInt().toString())
-        bundle.putString("tvHighTemp", body.main.temp_max.toInt().toString())
-        bundle.putString("tvLowTemp", body.main.temp_min.toInt().toString())
-        bundle.putString("tvFeelsLike", body.main.feels_like.toInt().toString())
-        bundle.putString("tvHumidity", body.main.humidity.toString())
-        bundle.putString("tvWindSpeed", body.wind.speed.toInt().toString())
-     */
         showWeatherFragment.arguments = bundle
     }
 
@@ -198,82 +209,5 @@ class MainActivity : AppCompatActivity() {
             hideSoftInputFromWindow(currentFocus?.windowToken,0)
         }
     }
-
-        /*
-        // Make sure getStringExtra runs only once
-        if (viewModel.cityName.isEmpty()) {
-            getStringExtra()
-        }
-
-        fetchWeatherData()
-        getCityWeatherData()
-    }
-
-    // Get string extra
-    private fun getStringExtra() {
-        val tempCityName = intent.getStringExtra("City")
-        if (tempCityName != null) {
-            viewModel.cityName = tempCityName
-        }
-    }
-
-    // Fetch weather data
-    private fun fetchWeatherData() {
-        ApiService.getApiInterface()?.getCityWeatherData("metric", viewModel.cityName, apiKey)?.enqueue(object: Callback<City> {
-            override fun onResponse(call: Call<City>, response: Response<City>) {
-                if (response.isSuccessful) {
-                    setDataOnView(response.body())
-                } else {
-                    binding.root.visibility = GONE
-                    val intent = Intent(this@MainActivity, StartCity::class.java)
-                    startActivity(intent)
-                    Toast.makeText(applicationContext, "Invalid City Name", Toast.LENGTH_SHORT).show()
-                }
-            }
-
-            override fun onFailure(call: Call<City>, error: Throwable) {
-                println(error)
-                Toast.makeText(applicationContext, "Error" ,Toast.LENGTH_SHORT).show()
-            }
-        })
-    }
-
-    // Get city weather data
-    private fun getCityWeatherData() {
-        val searchBar = findViewById<EditText>(R.id.etSearchBar)
-        searchBar.setOnKeyListener(View.OnKeyListener {
-                _, keyCode, event -> if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_UP) {
-            if (searchBar.text.isNotEmpty()) {
-                viewModel.cityName = searchBar.text.toString()
-                fetchWeatherData()
-                hideSoftKeyboard()
-                searchBar.text.clear()
-            }
-            return@OnKeyListener true
-        }
-            false
-        })
-    }
-
-    // Hide softkeyboard
-    private fun Activity.hideSoftKeyboard() {
-        (getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager).apply {
-            hideSoftInputFromWindow(currentFocus?.windowToken,0)
-        }
-    }
-
-    // Set data on view
-    @SuppressLint("SetTextI18n")
-    private fun setDataOnView(body: City?) {
-        binding.tvWeather.text = body!!.main.temp.toInt().toString() + "°"
-        binding.tvLocation.text = body!!.name
-        binding.tvDescription.text = body.weather[0].main
-        binding.tvHighTemp.text =  "H: " + body.main.temp_max.toInt().toString() + "°"
-        binding.tvLowTemp.text = "L: " + body.main.temp_min.toInt().toString() + "°"
-        binding.tvFeelsLike.text = body.main.feels_like.toInt().toString() + "°"
-        binding.tvHumidity.text = body.main.humidity.toString() + "%"
-        binding.tvWindSpeed.text = body.wind.speed.toInt().toString() + " m/s"
-    }
-
-         */
 }
+

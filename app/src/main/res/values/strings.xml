@@ -2,7 +2,7 @@
     <string name="app_name">WeatherApp</string>
     <string name="enter_location">Enter Location</string>
     <string name="clouds">Clouds</string>
-    <string name="uppsala">Uppsala</string>
+    <string name="location">Paris</string>
     <string name="_7">7°</string>
     <string name="h_24">H: 24°</string>
     <string name="l_14">L: 14°</string>
@@ -12,7 +12,5 @@
     <string name="_12_m_s">12 m/s</string>
     <string name="_5">5%</string>
     <string name="_19">19°</string>
-    <string name="stockholm">Stockholm</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="h_l">H/L: 13/15</string>
 </resources>

@@ -3,7 +3,7 @@ package com.example.weatherapp.model
 data class Data(
     val current: Current,
     val hourly: ArrayList<Hourly>,
-    val daily: ArrayList<Daily>
+    val daily: ArrayList<Daily>,
 ) {
      class Current(val weather: ArrayList<Weather>) {
          val temp: Double = 0.00
@@ -12,9 +12,7 @@ data class Data(
          val wind_speed: Double = 0.00
 
          class Weather {
-             val id: Int = 0
              val main: String = ""
-             val description: String = ""
              val icon: String = ""
          }
      }
@@ -24,23 +22,22 @@ data class Data(
         val temp: Double = 0.00
 
         class Weather {
-            val id: Int = 0
-            val main: String = ""
-            val description: String = ""
             val icon: String = ""
         }
     }
 
-    class Daily(val weather: ArrayList<Hourly.Weather>) {
-        val dt1: Int = 0
-        val temp1: Double = 0.00
+    class Daily(val weather: ArrayList<Weather>, val temp: Temp) {
+        val dt: Int = 0
+
+        class Temp {
+            val min: Double = 0.00
+            val max: Double = 0.00
+        }
 
         class Weather {
-            val id: Int = 0
-            val main: String = ""
-            val description: String = ""
             val icon: String = ""
         }
     }
+
 }
 
