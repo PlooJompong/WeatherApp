@@ -40,7 +40,7 @@ class ShowWeatherFragment : Fragment() {
             fragmentBinding.tvLocation.text = "$location"
             fragmentBinding.tvWeather.text = "$weather°"
             fragmentBinding.tvHighTemp.text = "H: $highTemp°"
-            fragmentBinding.tvLowTemp.text = "L: $lowTemp°"
+            fragmentBinding.tvLowTemp.text = "L: $lowTemp:00"
             fragmentBinding.tvFeelsLike.text = "$feelsLike°"
             fragmentBinding.tvHumidity.text = "$humidity%"
             fragmentBinding.tvWindSpeed.text = "$windSpeed m/s"

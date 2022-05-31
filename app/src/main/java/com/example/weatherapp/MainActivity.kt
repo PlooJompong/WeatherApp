@@ -136,12 +136,23 @@ class MainActivity : AppCompatActivity() {
         return dt.toString().lowercase().replaceFirstChar { it.uppercase() }
     }
 
+    private  fun timeStampToTime(timeStamp: Long): String {
+        val dt = timeStamp.let {
+            Instant.ofEpochSecond(it)
+                .atZone(ZoneId.systemDefault())
+                .toLocalTime()
+                .hour
+        }
+
+        return dt.toString()
+    }
+
     private fun sendDataToFragment(body: Data?) {
         val bundle = Bundle()
         bundle.putString("tvLocation", viewModel.cityName)
         bundle.putString("tvDescription", body!!.current.weather[0].main)
         bundle.putString("tvHighTemp", timeStampToDate(body.daily[0].dt.toLong()))
-        bundle.putString("tvLowTemp", timeStampToDate(body.daily[1].dt.toLong()))
+        bundle.putString("tvLowTemp", timeStampToTime(body.hourly[2].dt.toLong()))
         bundle.putString("tvWeather", body.current.temp.toInt().toString())
         bundle.putString("tvHumidity", body.current.humidity.toString())
         bundle.putString("tvFeelsLike", body.current.feels_like.toInt().toString())
