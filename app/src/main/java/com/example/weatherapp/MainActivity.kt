@@ -11,8 +11,8 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
 import com.example.weatherapp.api.ApiService
 import com.example.weatherapp.databinding.ActivityMainBinding
-import com.example.weatherapp.model.City
 import com.example.weatherapp.model.Data
+import com.example.weatherapp.model.LatLon
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -53,8 +53,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun fetLatLon() {
-        ApiService.getApiInterface()?.getLatLon(viewModel.cityName, apiKey)?.enqueue(object: Callback<City> {
-            override fun onResponse(call: Call<City>, response: Response<City>) {
+        ApiService.getApiInterface()?.getLatLon(viewModel.cityName, "metric", apiKey)?.enqueue(object: Callback<LatLon> {
+            override fun onResponse(call: Call<LatLon>, response: Response<LatLon>) {
                 if (response.isSuccessful) {
                     saveLatLon(response.body())
                     fetchWeatherData()
@@ -69,16 +69,19 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
-            override fun onFailure(call: Call<City>, error: Throwable) {
+            override fun onFailure(call: Call<LatLon>, error: Throwable) {
                 println(error)
             }
         })
     }
 
-    private fun saveLatLon(body: City?) {
-        viewModel.lat = body!!.coord.lat
+    private fun saveLatLon(body: LatLon?) {
+        viewModel.cityName = body!!.name
+        viewModel.lat = body.coord.lat
         viewModel.lon = body.coord.lon
-        viewModel.cityName = body.name
+        viewModel.low = body.main.temp_min
+        viewModel.high = body.main.temp_max
+
     }
 
     private fun fetchWeatherData() {
@@ -150,13 +153,26 @@ class MainActivity : AppCompatActivity() {
     private fun sendDataToFragment(body: Data?) {
         val bundle = Bundle()
         bundle.putString("tvLocation", viewModel.cityName)
-        bundle.putString("tvDescription", body!!.current.weather[0].main)
+        bundle.putString("tvWeather", body!!.current.temp.toInt().toString())
+        bundle.putString("tvMain", body.current.weather[0].main)
+        // High/Low temp
+        bundle.putString("lowTemp", viewModel.low.toInt().toString())
+        bundle.putString("highTemp", viewModel.high.toInt().toString())
+
+        bundle.putString("tvFeelsLike", body.current.feels_like.toInt().toString())
+        bundle.putString("tvHumidity", body.current.humidity.toString())
+        bundle.putString("tvWindSpeed", body.current.wind_speed.toString())
+
+        //icon
+        bundle.putString("icon", body.current.weather[0].icon)
+
+
+        /*
+        bundle.putString("tvWindSpeed", body.hourly[18].weather[0].main)
         bundle.putString("tvHighTemp", timeStampToDate(body.daily[0].dt.toLong()))
         bundle.putString("tvLowTemp", timeStampToTime(body.hourly[18].dt.toLong()))
-        bundle.putString("tvWeather", body.current.temp.toInt().toString())
-        bundle.putString("tvHumidity", body.current.humidity.toString())
-        bundle.putString("tvFeelsLike", body.current.feels_like.toInt().toString())
-        bundle.putString("tvWindSpeed", body.hourly[18].weather[0].main)
+
+         */
 
         /*
         bundle.putString("tvLocation", body.name)
