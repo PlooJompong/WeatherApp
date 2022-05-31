@@ -152,27 +152,34 @@ class MainActivity : AppCompatActivity() {
 
     private fun sendDataToFragment(body: Data?) {
         val bundle = Bundle()
+        //Current
         bundle.putString("tvLocation", viewModel.cityName)
         bundle.putString("tvWeather", body!!.current.temp.toInt().toString())
         bundle.putString("tvMain", body.current.weather[0].main)
-        // High/Low temp
         bundle.putString("lowTemp", viewModel.low.toInt().toString())
         bundle.putString("highTemp", viewModel.high.toInt().toString())
-
         bundle.putString("tvFeelsLike", body.current.feels_like.toInt().toString())
         bundle.putString("tvHumidity", body.current.humidity.toString())
         bundle.putString("tvWindSpeed", body.current.wind_speed.toString())
-
-        //icon
         bundle.putString("icon", body.current.weather[0].icon)
-
-
-        /*
-        bundle.putString("tvWindSpeed", body.hourly[18].weather[0].main)
-        bundle.putString("tvHighTemp", timeStampToDate(body.daily[0].dt.toLong()))
-        bundle.putString("tvLowTemp", timeStampToTime(body.hourly[18].dt.toLong()))
-
-         */
+        //Hourly
+        //+1
+        bundle.putString("tvTime", timeStampToTime(body.hourly[1].dt.toLong()))
+        bundle.putString("tvTemp", body.hourly[1].temp.toInt().toString())
+        bundle.putString("iconHourly", body.hourly[1].weather[0].icon)
+        //+2
+        bundle.putString("tvTime2", timeStampToTime(body.hourly[2].dt.toLong()))
+        bundle.putString("tvTemp2", body.hourly[2].temp.toInt().toString())
+        bundle.putString("iconHourly2", body.hourly[2].weather[0].icon)
+        //+3
+        bundle.putString("tvTime3", timeStampToTime(body.hourly[3].dt.toLong()))
+        bundle.putString("tvTemp3", body.hourly[3].temp.toInt().toString())
+        bundle.putString("iconHourly3", body.hourly[3].weather[0].icon)
+        //+4
+        bundle.putString("tvTime4", timeStampToTime(body.hourly[4].dt.toLong()))
+        bundle.putString("tvTemp4", body.hourly[4].temp.toInt().toString())
+        bundle.putString("iconHourly4", body.hourly[4].weather[0].icon)
+        
 
         /*
         bundle.putString("tvLocation", body.name)

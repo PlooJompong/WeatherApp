@@ -21,6 +21,7 @@ data class Data(
 
     class Hourly(val weather: ArrayList<Weather>) {
         val dt: Int = 0
+        val temp: Double = 0.00
 
         class Weather {
             val id: Int = 0
@@ -31,7 +32,8 @@ data class Data(
     }
 
     class Daily(val weather: ArrayList<Hourly.Weather>) {
-        val dt: Int = 0
+        val dt1: Int = 0
+        val temp1: Double = 0.00
 
         class Weather {
             val id: Int = 0

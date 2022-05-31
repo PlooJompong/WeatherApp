@@ -9,7 +9,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         tools:context=".ShowWeatherFragment">
 
         <View
@@ -170,7 +170,7 @@
             app:layout_constraintVertical_bias="0.0" />
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/ivCurrentBox"
             android:layout_width="73dp"
             android:layout_height="63dp"
             app:layout_constraintBottom_toBottomOf="@+id/vBox1"
@@ -182,7 +182,7 @@
         <View
             android:id="@+id/vBox2"
             android:layout_width="350dp"
-            android:layout_height="130dp"
+            android:layout_height="120dp"
             android:layout_marginTop="40dp"
             android:alpha="0.2"
             android:background="@drawable/rounded_corner_black"
@@ -190,6 +190,227 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/vBox1" />
+
+        <TextView
+            android:id="@+id/tvTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto"
+            android:hint="@string/_7"
+            android:shadowColor="@color/black"
+            android:shadowDx="2"
+            android:shadowDy="2"
+            android:shadowRadius="3"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:text="TextView"
+            app:layout_constraintBottom_toTopOf="@+id/ivHourly"
+            app:layout_constraintEnd_toEndOf="@+id/ivHourly"
+            app:layout_constraintHorizontal_bias="0.466"
+            app:layout_constraintStart_toStartOf="@+id/ivHourly"
+            app:layout_constraintTop_toTopOf="@+id/vBox2" />
+
+        <TextView
+            android:id="@+id/tvTemp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto"
+            android:hint="@string/_7"
+            android:shadowColor="@color/black"
+            android:shadowDx="2"
+            android:shadowDy="2"
+            android:shadowRadius="3"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:text="TextView"
+            app:layout_constraintBottom_toBottomOf="@+id/vBox2"
+            app:layout_constraintEnd_toEndOf="@+id/ivHourly"
+            app:layout_constraintHorizontal_bias="0.466"
+            app:layout_constraintStart_toStartOf="@+id/ivHourly"
+            app:layout_constraintTop_toBottomOf="@+id/ivHourly" />
+
+        <ImageView
+            android:id="@+id/ivHourly"
+            android:layout_width="73dp"
+            android:layout_height="63dp"
+            android:layout_marginStart="10dp"
+            app:layout_constraintBottom_toBottomOf="@+id/vBox2"
+            app:layout_constraintEnd_toStartOf="@+id/ivHourly2"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/vBox2"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/tvTime2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto"
+            android:hint="@string/_7"
+            android:shadowColor="@color/black"
+            android:shadowDx="2"
+            android:shadowDy="2"
+            android:shadowRadius="3"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:text="TextView"
+            app:layout_constraintBottom_toTopOf="@+id/ivHourly"
+            app:layout_constraintEnd_toEndOf="@+id/ivHourly2"
+            app:layout_constraintHorizontal_bias="0.466"
+            app:layout_constraintStart_toStartOf="@+id/ivHourly2"
+            app:layout_constraintTop_toTopOf="@+id/tvTime"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/tvTemp2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto"
+            android:hint="@string/_7"
+            android:shadowColor="@color/black"
+            android:shadowDx="2"
+            android:shadowDy="2"
+            android:shadowRadius="3"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:text="TextView"
+            app:layout_constraintBottom_toBottomOf="@+id/tvTemp"
+            app:layout_constraintEnd_toEndOf="@+id/ivHourly2"
+            app:layout_constraintHorizontal_bias="0.466"
+            app:layout_constraintStart_toStartOf="@+id/ivHourly2"
+            app:layout_constraintTop_toBottomOf="@+id/ivHourly"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <ImageView
+            android:id="@+id/ivHourly2"
+            android:layout_width="73dp"
+            android:layout_height="63dp"
+            app:layout_constraintBottom_toBottomOf="@+id/ivHourly"
+            app:layout_constraintEnd_toStartOf="@+id/ivHourly3"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/ivHourly"
+            app:layout_constraintTop_toTopOf="@+id/ivHourly"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/tvTime3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto"
+            android:hint="@string/_7"
+            android:shadowColor="@color/black"
+            android:shadowDx="2"
+            android:shadowDy="2"
+            android:shadowRadius="3"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:text="TextView"
+            app:layout_constraintBottom_toTopOf="@+id/ivHourly3"
+            app:layout_constraintEnd_toEndOf="@+id/ivHourly3"
+            app:layout_constraintHorizontal_bias="0.466"
+            app:layout_constraintStart_toStartOf="@+id/ivHourly3"
+            app:layout_constraintTop_toTopOf="@+id/tvTime2"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/tvTemp3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto"
+            android:hint="@string/_7"
+            android:shadowColor="@color/black"
+            android:shadowDx="2"
+            android:shadowDy="2"
+            android:shadowRadius="3"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:text="TextView"
+            app:layout_constraintBottom_toBottomOf="@+id/tvTemp2"
+            app:layout_constraintEnd_toEndOf="@+id/ivHourly3"
+            app:layout_constraintHorizontal_bias="0.466"
+            app:layout_constraintStart_toStartOf="@+id/ivHourly3"
+            app:layout_constraintTop_toBottomOf="@+id/ivHourly2"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <ImageView
+            android:id="@+id/ivHourly3"
+            android:layout_width="73dp"
+            android:layout_height="63dp"
+            app:layout_constraintBottom_toBottomOf="@+id/ivHourly2"
+            app:layout_constraintEnd_toStartOf="@+id/ivHourly4"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/ivHourly2"
+            app:layout_constraintTop_toTopOf="@+id/ivHourly2"
+            app:layout_constraintVertical_bias="0.0"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/tvTime4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto"
+            android:hint="@string/_7"
+            android:shadowColor="@color/black"
+            android:shadowDx="2"
+            android:shadowDy="2"
+            android:shadowRadius="3"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:text="TextView"
+            app:layout_constraintBottom_toTopOf="@+id/ivHourly3"
+            app:layout_constraintEnd_toEndOf="@+id/ivHourly4"
+            app:layout_constraintHorizontal_bias="0.466"
+            app:layout_constraintStart_toStartOf="@+id/ivHourly4"
+            app:layout_constraintTop_toTopOf="@+id/tvTime3"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/tvTemp4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto"
+            android:hint="@string/_7"
+            android:shadowColor="@color/black"
+            android:shadowDx="2"
+            android:shadowDy="2"
+            android:shadowRadius="3"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:text="TextView"
+            app:layout_constraintBottom_toBottomOf="@+id/tvTemp3"
+            app:layout_constraintEnd_toEndOf="@+id/ivHourly4"
+            app:layout_constraintHorizontal_bias="0.466"
+            app:layout_constraintStart_toStartOf="@+id/ivHourly4"
+            app:layout_constraintTop_toTopOf="@+id/tvTemp3"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <ImageView
+            android:id="@+id/ivHourly4"
+            android:layout_width="73dp"
+            android:layout_height="63dp"
+            android:layout_marginEnd="10dp"
+            app:layout_constraintBottom_toBottomOf="@+id/ivHourly3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/ivHourly3"
+            app:layout_constraintTop_toTopOf="@+id/ivHourly3"
+            tools:srcCompat="@tools:sample/avatars" />
 
         <View
             android:id="@+id/vBox3"
@@ -205,6 +426,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/vBox2"
             app:layout_constraintVertical_bias="1.0" />
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
