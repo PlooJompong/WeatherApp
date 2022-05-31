@@ -152,11 +152,11 @@ class MainActivity : AppCompatActivity() {
         bundle.putString("tvLocation", viewModel.cityName)
         bundle.putString("tvDescription", body!!.current.weather[0].main)
         bundle.putString("tvHighTemp", timeStampToDate(body.daily[0].dt.toLong()))
-        bundle.putString("tvLowTemp", timeStampToTime(body.hourly[2].dt.toLong()))
+        bundle.putString("tvLowTemp", timeStampToTime(body.hourly[18].dt.toLong()))
         bundle.putString("tvWeather", body.current.temp.toInt().toString())
         bundle.putString("tvHumidity", body.current.humidity.toString())
         bundle.putString("tvFeelsLike", body.current.feels_like.toInt().toString())
-        bundle.putString("tvWindSpeed", body.current.wind_speed.toInt().toString())
+        bundle.putString("tvWindSpeed", body.hourly[18].weather[0].main)
 
         /*
         bundle.putString("tvLocation", body.name)

@@ -19,7 +19,7 @@ data class Data(
          }
      }
 
-    class Hourly (val weather: ArrayList<Hourly.Weather>) {
+    class Hourly(val weather: ArrayList<Weather>) {
         val dt: Int = 0
 
         class Weather {
@@ -30,7 +30,7 @@ data class Data(
         }
     }
 
-    class Daily (val weather: ArrayList<Daily.Weather>) {
+    class Daily(val weather: ArrayList<Hourly.Weather>) {
         val dt: Int = 0
 
         class Weather {
