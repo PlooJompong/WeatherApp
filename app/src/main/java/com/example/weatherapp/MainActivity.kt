@@ -179,7 +179,7 @@ class MainActivity : AppCompatActivity() {
         bundle.putString("tvTime4", timeStampToTime(body.hourly[4].dt.toLong()))
         bundle.putString("tvTemp4", body.hourly[4].temp.toInt().toString())
         bundle.putString("iconHourly4", body.hourly[4].weather[0].icon)
-        
+
 
         /*
         bundle.putString("tvLocation", body.name)

@@ -46,7 +46,7 @@ class ShowWeatherFragment : Fragment() {
             fragmentBinding.tvWeather.text = "$weather°"
             fragmentBinding.tvMain.text = main
             fragmentBinding.tvHighLowTemp.text = "L/H:  $lowTemp°/$highTemp°"
-            fragmentBinding.tvFeelsLike.text = "Feels ike:  $feelsLike°"
+            fragmentBinding.tvFeelsLike.text = "Feels like:  $feelsLike°"
             fragmentBinding.tvHumidity.text = "Humunity:  $humidity%"
             fragmentBinding.tvWindSpeed.text = "Windspeed:  $windSpeed m/s"
             //Hourly
@@ -68,7 +68,7 @@ class ShowWeatherFragment : Fragment() {
             Picasso.get()
                 .load(picUrl2)
                 .into(fragmentBinding.ivHourly2)
-            fragmentBinding.tvTime2.text = "$dt2:00"
+            fragmentBinding.tvTime2.text = "$dt2"
             fragmentBinding.tvTemp2.text = "$tempHourly2°"
             //+3
             val dt3 = bundle.getString("tvTime3")
