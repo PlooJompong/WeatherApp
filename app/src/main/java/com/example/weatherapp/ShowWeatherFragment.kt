@@ -47,7 +47,7 @@ class ShowWeatherFragment : Fragment() {
             fragmentBinding.tvHighLowTemp.text = "L/H:  $lowTemp°/$highTemp°"
             fragmentBinding.tvFeelsLike.text = "Feels like:  $feelsLike°"
             fragmentBinding.tvHumidity.text = "Humunity:  $humidity%"
-            fragmentBinding.tvWindSpeed.text = "Windspeed:  $windSpeed m/s"
+            fragmentBinding.tvWindSpeed.text = "Wind speed:  $windSpeed m/s"
             //Hourly
             //+1
             val dtHourly = bundle.getString("tvTime")

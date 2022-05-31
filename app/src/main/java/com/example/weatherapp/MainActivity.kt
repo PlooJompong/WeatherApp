@@ -11,8 +11,8 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
 import com.example.weatherapp.api.ApiService
 import com.example.weatherapp.databinding.ActivityMainBinding
-import com.example.weatherapp.model.Data
 import com.example.weatherapp.model.LatLon
+import com.example.weatherapp.model.WeatherData
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -20,7 +20,7 @@ import java.time.Instant
 import java.time.ZoneId
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var viewModel: CityNameViewModel
+    private lateinit var viewModel: CityViewModel
     private lateinit var binding: ActivityMainBinding
     private val apiKey = "496590d7d8475f1ebd44ee0000855e47"
     private val fragmentManager: FragmentManager = supportFragmentManager
@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate (savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(this)[CityNameViewModel::class.java]
+        viewModel = ViewModelProvider(this)[CityViewModel::class.java]
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView (binding.root)
 
@@ -65,7 +65,7 @@ class MainActivity : AppCompatActivity() {
                             .addToBackStack(null)
                             .commit()
                     }
-                    Toast.makeText(this@MainActivity, "Fail", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@MainActivity, "Invalid Location", Toast.LENGTH_SHORT).show()
                 }
             }
 
@@ -85,8 +85,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun fetchWeatherData() {
-        ApiService.getApiInterface()?.getData(viewModel.lat, viewModel.lon,"minutely, hourly, alerts","metric", apiKey)?.enqueue(object: Callback<Data> {
-            override fun onResponse(call: Call<Data>, response: Response<Data>) {
+        ApiService.getApiInterface()?.getData(viewModel.lat, viewModel.lon,"minutely, hourly, alerts","metric", apiKey)?.enqueue(object: Callback<WeatherData> {
+            override fun onResponse(call: Call<WeatherData>, response: Response<WeatherData>) {
                 if (response.isSuccessful) {
                     if (!showWeatherFragment.isVisible) {
                         sendDataToFragment(response.body())
@@ -96,8 +96,6 @@ class MainActivity : AppCompatActivity() {
                                 .addToBackStack(null)
                                 .commit()
                         }
-                        // Debug
-                        Toast.makeText(this@MainActivity, viewModel.cityName, Toast.LENGTH_SHORT).show()
                     } else {
                         sendDataToFragment(response.body())
                         fragmentManager.beginTransaction().apply {
@@ -117,12 +115,10 @@ class MainActivity : AppCompatActivity() {
                             .addToBackStack(null)
                             .commit()
                     }
-                    //Debug
-                    Toast.makeText(this@MainActivity, "e", Toast.LENGTH_SHORT).show()
                 }
             }
 
-            override fun onFailure(call: Call<Data>, error: Throwable) {
+            override fun onFailure(call: Call<WeatherData>, error: Throwable) {
                 println(error)
             }
         })
@@ -150,7 +146,7 @@ class MainActivity : AppCompatActivity() {
         return dt.toString()
     }
 
-    private fun sendDataToFragment(body: Data?) {
+    private fun sendDataToFragment(body: WeatherData?) {
         val bundle = Bundle()
         //Current
         bundle.putString("tvLocation", viewModel.cityName)

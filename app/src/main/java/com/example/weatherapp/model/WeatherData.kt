@@ -1,6 +1,6 @@
 package com.example.weatherapp.model
 
-data class Data(
+data class WeatherData(
     val current: Current,
     val hourly: ArrayList<Hourly>,
     val daily: ArrayList<Daily>,

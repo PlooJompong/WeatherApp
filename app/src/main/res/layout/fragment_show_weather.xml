@@ -107,7 +107,7 @@
             app:layout_constraintStart_toStartOf="@+id/tvMain"
             app:layout_constraintTop_toBottomOf="@+id/tvMain"
             app:layout_constraintVertical_bias="0.0"
-            tools:ignore="TextContrastCheck" />
+            tools:ignore="HardcodedText,SmallSp,TextContrastCheck" />
 
         <TextView
             android:id="@+id/tvFeelsLike"
@@ -127,7 +127,8 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/tvHighLowTemp"
             app:layout_constraintTop_toBottomOf="@+id/tvHighLowTemp"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintVertical_bias="0.0"
+            tools:ignore="HardcodedText,SmallSp" />
 
         <TextView
             android:id="@+id/tvHumidity"
@@ -148,7 +149,7 @@
             app:layout_constraintStart_toStartOf="@+id/tvFeelsLike"
             app:layout_constraintTop_toBottomOf="@+id/tvFeelsLike"
             app:layout_constraintVertical_bias="0.0"
-            tools:ignore="TextContrastCheck" />
+            tools:ignore="HardcodedText,SmallSp,TextContrastCheck" />
 
         <TextView
             android:id="@+id/tvWindSpeed"
@@ -169,7 +170,7 @@
             app:layout_constraintStart_toStartOf="@+id/tvHumidity"
             app:layout_constraintTop_toBottomOf="@+id/tvHumidity"
             app:layout_constraintVertical_bias="0.0"
-            tools:ignore="TextContrastCheck" />
+            tools:ignore="HardcodedText,SmallSp,TextContrastCheck" />
 
         <ImageView
             android:id="@+id/ivCurrentBox"
@@ -179,7 +180,8 @@
             app:layout_constraintEnd_toEndOf="@+id/vBox1"
             app:layout_constraintStart_toStartOf="@+id/vBox1"
             app:layout_constraintTop_toTopOf="@+id/vBox1"
-            tools:srcCompat="@tools:sample/avatars" />
+            tools:srcCompat="@tools:sample/avatars"
+            tools:ignore="ContentDescription" />
 
         <View
             android:id="@+id/vBox2"
@@ -243,7 +245,8 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/vBox2"
-            tools:srcCompat="@tools:sample/avatars" />
+            tools:srcCompat="@tools:sample/avatars"
+            tools:ignore="ContentDescription" />
 
         <TextView
             android:id="@+id/tvTime2"
@@ -295,7 +298,7 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/ivHourly"
             app:layout_constraintTop_toTopOf="@+id/ivHourly"
-            tools:ignore="ImageContrastCheck"
+            tools:ignore="ContentDescription,ImageContrastCheck"
             tools:srcCompat="@tools:sample/avatars" />
 
         <TextView
@@ -349,7 +352,8 @@
             app:layout_constraintStart_toEndOf="@+id/ivHourly2"
             app:layout_constraintTop_toTopOf="@+id/ivHourly2"
             app:layout_constraintVertical_bias="0.0"
-            tools:srcCompat="@tools:sample/avatars" />
+            tools:srcCompat="@tools:sample/avatars"
+            tools:ignore="ContentDescription" />
 
         <TextView
             android:id="@+id/tvTime4"
@@ -403,7 +407,8 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/ivHourly3"
             app:layout_constraintTop_toTopOf="@+id/ivHourly3"
-            tools:srcCompat="@tools:sample/avatars" />
+            tools:srcCompat="@tools:sample/avatars"
+            tools:ignore="ContentDescription" />
 
         <View
             android:id="@+id/vBox3"
@@ -468,7 +473,8 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/vBox3"
-            tools:srcCompat="@tools:sample/avatars" />
+            tools:srcCompat="@tools:sample/avatars"
+            tools:ignore="ContentDescription" />
 
         <TextView
             android:id="@+id/tvDay2"
@@ -518,7 +524,8 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/ivDaily"
             app:layout_constraintTop_toTopOf="@+id/ivDaily"
-            tools:srcCompat="@tools:sample/avatars" />
+            tools:srcCompat="@tools:sample/avatars"
+            tools:ignore="ContentDescription" />
 
         <TextView
             android:id="@+id/tvDay3"
@@ -567,7 +574,8 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/ivDaily2"
             app:layout_constraintTop_toTopOf="@+id/ivDaily2"
-            tools:srcCompat="@tools:sample/avatars" />
+            tools:srcCompat="@tools:sample/avatars"
+            tools:ignore="ContentDescription" />
 
         <TextView
             android:id="@+id/tvDay4"
@@ -617,7 +625,7 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/ivDaily3"
             app:layout_constraintTop_toTopOf="@+id/ivDaily3"
-            tools:ignore="ImageContrastCheck"
+            tools:ignore="ContentDescription,ImageContrastCheck"
             tools:srcCompat="@tools:sample/avatars" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

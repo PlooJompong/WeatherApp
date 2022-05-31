@@ -1,6 +1,6 @@
 package com.example.weatherapp.api
 
-import com.example.weatherapp.model.Data
+import com.example.weatherapp.model.WeatherData
 import com.example.weatherapp.model.LatLon
 import retrofit2.Call
 import retrofit2.http.GET
@@ -20,6 +20,6 @@ interface ApiInterface {
                 @Query("exclude") exclude: String,
                 @Query("units") metric: String,
                 @Query("appid") appId: String
-    ): Call<Data>
+    ): Call<WeatherData>
 
 }
