@@ -16,6 +16,8 @@ import com.example.weatherapp.model.Data
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.time.Instant
+import java.time.ZoneId
 
 class MainActivity : AppCompatActivity() {
     private lateinit var viewModel: CityNameViewModel
@@ -123,14 +125,23 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
+    private  fun timeStampToDate(timeStamp: Long): String {
+        val dt = timeStamp.let {
+            Instant.ofEpochSecond(it)
+                .atZone(ZoneId.systemDefault())
+                .toLocalDate()
+                .dayOfWeek
+        }
+
+        return dt.toString().lowercase().replaceFirstChar { it.uppercase() }
+    }
+
     private fun sendDataToFragment(body: Data?) {
         val bundle = Bundle()
         bundle.putString("tvLocation", viewModel.cityName)
-        //TODO - FIX current.weather[0].main
-        //bundle.putString("tvDescription", body!!.current.weather[0].main)
-        bundle.putString("tvHighTemp", body!!.daily[0].dt.toString())
-        bundle.putString("tvLowTemp", body.daily[1].dt.toString())
-
+        bundle.putString("tvDescription", body!!.current.weather[0].main)
+        bundle.putString("tvHighTemp", timeStampToDate(body.daily[0].dt.toLong()))
+        bundle.putString("tvLowTemp", timeStampToDate(body.daily[1].dt.toLong()))
         bundle.putString("tvWeather", body.current.temp.toInt().toString())
         bundle.putString("tvHumidity", body.current.humidity.toString())
         bundle.putString("tvFeelsLike", body.current.feels_like.toInt().toString())
