@@ -15,7 +15,7 @@
         <View
             android:id="@+id/vBox1"
             android:layout_width="350dp"
-            android:layout_height="140dp"
+            android:layout_height="160dp"
             android:layout_marginTop="16dp"
             android:alpha="0.2"
             android:background="@drawable/rounded_corner_black"
@@ -29,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="24dp"
             android:drawableEnd="@drawable/location"
             android:drawablePadding="10dp"
             android:fontFamily="@font/roboto"
@@ -64,7 +64,8 @@
             app:layout_constraintHorizontal_bias="0.141"
             app:layout_constraintStart_toStartOf="@+id/vBox1"
             app:layout_constraintTop_toTopOf="@+id/vBox1"
-            app:layout_constraintVertical_bias="0.704" />
+            app:layout_constraintVertical_bias="0.734" />
+
 
         <TextView
             android:id="@+id/tvMain"
@@ -85,8 +86,7 @@
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toEndOf="@+id/tvLocation"
             app:layout_constraintTop_toTopOf="@+id/vBox1"
-            app:layout_constraintVertical_bias="0.222" />
-
+            app:layout_constraintVertical_bias="0.296" />
 
         <TextView
             android:id="@+id/tvHighLowTemp"
@@ -171,8 +171,8 @@
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="57dp"
-            android:layout_height="48dp"
+            android:layout_width="73dp"
+            android:layout_height="63dp"
             app:layout_constraintBottom_toBottomOf="@+id/vBox1"
             app:layout_constraintEnd_toEndOf="@+id/vBox1"
             app:layout_constraintStart_toStartOf="@+id/vBox1"
@@ -182,7 +182,7 @@
         <View
             android:id="@+id/vBox2"
             android:layout_width="350dp"
-            android:layout_height="120dp"
+            android:layout_height="130dp"
             android:layout_marginTop="40dp"
             android:alpha="0.2"
             android:background="@drawable/rounded_corner_black"
@@ -194,7 +194,7 @@
         <View
             android:id="@+id/vBox3"
             android:layout_width="350dp"
-            android:layout_height="120dp"
+            android:layout_height="130dp"
             android:layout_marginTop="40dp"
             android:layout_marginBottom="16dp"
             android:alpha="0.2"
