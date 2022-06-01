@@ -39,7 +39,7 @@
             android:shadowRadius="3"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
-            android:textSize="16sp"
+            android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@+id/vBox1"
             app:layout_constraintTop_toTopOf="@+id/vBox1"
