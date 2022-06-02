@@ -79,9 +79,6 @@ class MainActivity : AppCompatActivity() {
         viewModel.cityName = body!!.name
         viewModel.lat = body.coord.lat
         viewModel.lon = body.coord.lon
-        viewModel.low = body.main.temp_min
-        viewModel.high = body.main.temp_max
-
     }
 
     private fun fetchWeatherData() {
